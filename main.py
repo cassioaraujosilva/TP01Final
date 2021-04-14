@@ -5,7 +5,7 @@ import csv
 import json
 
 import numpy as np
-
+import pandas
 
 def calculaTempoAleatorio(paramArray):
     # espera o a array no segunte formato:
@@ -75,6 +75,8 @@ if __name__ == '__main__':
     vetoraux = list()
     vetorArray = list()
     vetorArray2 = list()
+    inicio = str()
+    fim = str()
     # Tk().withdraw()  # we don't want a full GUI, so keep the root window from appearing
     # filepath = askopenfilename()  # show an "Open" dialog box and return the path to the selected file
     # filename = os.path.basename (filepath)
@@ -107,16 +109,21 @@ if __name__ == '__main__':
         for row in csv_reader:
             paramaux = [row["Tipo"], row["arg1"], row["arg2"]]
             paramCsv[row["Original"]] = paramaux
-    #print ("csv " + paramCsv.pop(0))
-    #parametrosDeTempo = dict()
-   # p3 = paramCsv
-    #parametrosDeTempo = paramCsv
+
+    with open('EXTREMIDADES.csv') as csv_file:
+        csv_reader = csv.DictReader(csv_file, fieldnames=["START", "END"])
+        csv_reader.__next__()
+        for row in csv_reader:
+            inicio = row["START"]
+            fim = row["END"]
 
 import numpy as np
+import scipy.stats as st
+
 
 import copy
 #
-N = 100 #Define número de simulações
+N = 10 #Define número de simulações
 #
 # # cria Dictionary para receber as frequencias
 vetorQnt = dict()
@@ -124,6 +131,7 @@ for vetor in vetorArray:
      vetorQnt[vetor[0] + "_" + vetor[1]] = 0
      vetorPerc = copy.deepcopy(vetorQnt)
 #
+custoamostras = list()
 # # LOOP DE SIMULAÇÃO
 with open('simulacao.csv', 'w',newline='') as file:
     f = csv.writer(file)
@@ -138,20 +146,29 @@ with open('simulacao.csv', 'w',newline='') as file:
             vetor[2] = calculaTempoAleatorio(paramCsv[vetor[2]])
 #
 #         # aplica algorito de DIJKSTRA
-        melhorCaminho = calculateDijkstraDistances(vetorRandom, "A", "Z")
+        melhorCaminho = calculateDijkstraDistances(vetorRandom, inicio, fim)
         f.writerow(str(melhorCaminho))
 #        melhorCaminho.
 
         custoprocesso = 0.0
-        print ("Melhor Caminho: " + str(melhorCaminho))
+        #print ("Melhor Caminho: " + str(melhorCaminho))
 #     # computa ocorrencia do caminho
         for vetor in melhorCaminho:
             tmp = vetor[0] + "_" + vetor[1]
             custo = float(vetor[2])
             custoprocesso = custo + custoprocesso
-          #  print("Melhor caminho: " +str(melhorCaminho) + " Custo: " + str(custoprocesso))
-            print ("tmp: " + tmp)
+
+            print("Melhor caminho: " +str(melhorCaminho)) # + " Custo: " + str(custoprocesso))
+         #   print ("tmp: " + tmp)
             vetorQnt[tmp] = vetorQnt[tmp] + 1
+        custoamostras.append(custoprocesso)
+    media = np.mean(custoamostras)
+    desviopadrao = np.std(custoamostras, axis=None, dtype=float)
+    intervaloconfianca =st.t.interval(0.95, len(custoamostras)-1, loc=np.mean(custoamostras), scale=st.sem(custoamostras))
+    print("Número de Amostras: ", N)
+    print("Média: ", media)
+    print("Desvio padrao: ", desviopadrao)
+    print("Intervalo de confiança:", intervaloconfianca)
 
 #     # FIM do loop de simulção
 #
@@ -160,8 +177,8 @@ print ("Dados " + str(vetorQnt))
 for vetor in vetorQnt:
      vetorPerc[vetor] = int(vetorQnt[vetor]) / N
 #
-# print(vetorQnt)
-# print(vetorPerc)
+print("Quantidade de trechos utilizados: ",  vetorQnt)
+print("Percentual de trechos utilizados: ", vetorPerc)
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
