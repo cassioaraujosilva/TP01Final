@@ -1,0 +1,18 @@
+D:\OneDrive\Particular\UFPR\SimulaçãoLogistica\TP01\TP01Final\venv\Scripts\python.exe D:/OneDrive/Particular/UFPR/SimulaçãoLogistica/TP01/TP01Final/main.py
+Melhor caminho: [['A', 'E', 2.55], ['E', 'F', 2.26], ['F', 'G', 3.16], ['G', 'Z', 3.22]]
+Melhor caminho: [['A', 'C', 4.4], ['C', 'I', 4.67], ['I', 'L', 1.42], ['L', 'Z', 1.82]]
+Melhor caminho: [['A', 'C', 4.67], ['C', 'I', 3.94], ['I', 'L', 1.86], ['L', 'Z', 2.23]]
+Melhor caminho: [['A', 'B', 1.72], ['B', 'F', 3.38], ['F', 'G', 5.14], ['G', 'Z', 2.07]]
+Melhor caminho: [['A', 'B', 1.69], ['B', 'F', 2.43], ['F', 'G', 2.77], ['G', 'Z', 3.91]]
+Melhor caminho: [['A', 'B', 1.35], ['B', 'F', 3.58], ['F', 'G', 4.43], ['G', 'Z', 3.09]]
+Melhor caminho: [['A', 'B', 0.6], ['B', 'F', 4.15], ['F', 'G', 3.72], ['G', 'Z', 2.84]]
+Melhor caminho: [['A', 'B', 0.73], ['B', 'F', 3.21], ['F', 'G', 3.59], ['G', 'Z', 2.64]]
+Melhor caminho: [['A', 'C', 4.81], ['C', 'I', 4.34], ['I', 'L', 1.21], ['L', 'Z', 1.15]]
+Melhor caminho: [['A', 'B', 1.18], ['B', 'F', 3.39], ['F', 'G', 3.77], ['G', 'Z', 3.94]]
+Número de Amostras:  10
+Média:  11.703000000000001
+Desvio padrao:  0.790076578566913
+Intervalo de confiança: (11.107240869560322, 12.29875913043968)
+Dados {'A_B': 0, 'A_E': 0, 'A_C': 0, 'B_F': 0, 'F_G': 0, 'G_Z': 7, 'E_F': 0, 'E_H': 0, 'C_E': 0, 'C_D': 0, 'C_I': 0, 'D_E': 0, 'D_H': 0, 'D_K': 0, 'I_K': 0, 'I_L': 0, 'K_L': 0, 'L_Z': 3, 'L_M': 0, 'M_Z': 0, 'K_J': 0, 'H_J': 0, 'H_G': 0, 'J_Z': 0, 'J_M': 0}
+Quantidade de trechos utilizados:  {'A_B': 0, 'A_E': 0, 'A_C': 0, 'B_F': 0, 'F_G': 0, 'G_Z': 7, 'E_F': 0, 'E_H': 0, 'C_E': 0, 'C_D': 0, 'C_I': 0, 'D_E': 0, 'D_H': 0, 'D_K': 0, 'I_K': 0, 'I_L': 0, 'K_L': 0, 'L_Z': 3, 'L_M': 0, 'M_Z': 0, 'K_J': 0, 'H_J': 0, 'H_G': 0, 'J_Z': 0, 'J_M': 0}
+Percentual de trechos utilizados:  {'A_B': 0.0, 'A_E': 0.0, 'A_C': 0.0, 'B_F': 0.0, 'F_G': 0.0, 'G_Z': 0.7, 'E_F': 0.0, 'E_H': 0.0, 'C_E': 0.0, 'C_D': 0.0, 'C_I': 0.0, 'D_E': 0.0, 'D_H': 0.0, 'D_K': 0.0, 'I_K': 0.0, 'I_L': 0.0, 'K_L': 0.0, 'L_Z': 0.3, 'L_M': 0.0, 'M_Z': 0.0, 'K_J': 0.0, 'H_J': 0.0, 'H_G': 0.0, 'J_Z': 0.0, 'J_M': 0.0}

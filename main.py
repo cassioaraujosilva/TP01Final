@@ -3,6 +3,7 @@
 import io
 import csv
 import json
+import statistics
 
 import numpy as np
 import pandas
@@ -123,7 +124,7 @@ import scipy.stats as st
 
 import copy
 #
-N = 10 #Define número de simulações
+N = 10000 #Define número de simulações
 #
 # # cria Dictionary para receber as frequencias
 vetorQnt = dict()
@@ -158,9 +159,9 @@ with open('simulacao.csv', 'w',newline='') as file:
             custo = float(vetor[2])
             custoprocesso = custo + custoprocesso
 
-            print("Melhor caminho: " +str(melhorCaminho)) # + " Custo: " + str(custoprocesso))
+        print("Melhor caminho: " +str(melhorCaminho)) # + " Custo: " + str(custoprocesso))
          #   print ("tmp: " + tmp)
-            vetorQnt[tmp] = vetorQnt[tmp] + 1
+        vetorQnt[tmp] = vetorQnt[tmp] + 1
         custoamostras.append(custoprocesso)
     media = np.mean(custoamostras)
     desviopadrao = np.std(custoamostras, axis=None, dtype=float)
@@ -168,9 +169,9 @@ with open('simulacao.csv', 'w',newline='') as file:
     print("Número de Amostras: ", N)
     print("Média: ", media)
     print("Desvio padrao: ", desviopadrao)
+    print("Desvio padrão populacional: ", statistics.pstdev(custoamostras,mu=None))
     print("Intervalo de confiança:", intervaloconfianca)
-
-#     # FIM do loop de simulção
+    #     # FIM do loop de simulação
 #
 print ("Dados " + str(vetorQnt))
 #calcula percentual
@@ -180,5 +181,26 @@ for vetor in vetorQnt:
 print("Quantidade de trechos utilizados: ",  vetorQnt)
 print("Percentual de trechos utilizados: ", vetorPerc)
 
+import numpy as np
+import matplotlib.pyplot as plt
+plt.style.use('seaborn-white')
+data = custoamostras
+plt.hist(data, bins=50, alpha=0.5, histtype='stepfilled', color='blue', edgecolor='none')
+plt.ylabel('Valores')
+plt.xlabel('Custos')
+plt.show()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+#
+# bins, patches = plt.hist(x=custoamostras.__len__(), bins='auto', color='#0504aa',
+#                             alpha=0.7, rwidth=0.85)
+# plt.grid(axis='y', alpha=0.75)
+# plt.xlabel('Value')
+# plt.ylabel('Frequency')
+# plt.title('My Very Own Histogram')
+# plt.text(23, 45, r'$\mu=15, b=3$')
+# maxfreq = custoamostras.max()
+# # Set a clean upper y-axis limit.
+# plt.ylim(ymax=np.ceil(maxfreq / 10) * 10 if maxfreq % 10 else maxfreq + 10)
+#
+# # See PyCharm help at https://www.jetbrains.com/help/pycharm/
