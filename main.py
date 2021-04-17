@@ -124,9 +124,10 @@ import scipy.stats as st
 
 import copy
 #
-N = 10000 #Define número de simulações
+N = 400 #Define número de simulações
 #
 # # cria Dictionary para receber as frequencias
+vetorcaminho = list()
 vetorQnt = dict()
 for vetor in vetorArray:
      vetorQnt[vetor[0] + "_" + vetor[1]] = 0
@@ -152,24 +153,26 @@ with open('simulacao.csv', 'w',newline='') as file:
 #        melhorCaminho.
 
         custoprocesso = 0.0
-        #print ("Melhor Caminho: " + str(melhorCaminho))
+       # print ("Melhor Caminho: " + str(melhorCaminho))
 #     # computa ocorrencia do caminho
         for vetor in melhorCaminho:
             tmp = vetor[0] + "_" + vetor[1]
             custo = float(vetor[2])
             custoprocesso = custo + custoprocesso
+            vetorQnt[tmp] = vetorQnt[tmp] + 1
 
-        print("Melhor caminho: " +str(melhorCaminho)) # + " Custo: " + str(custoprocesso))
+       # print("Melhor caminho: " +str(melhorCaminho)) # + " Custo: " + str(custoprocesso))
          #   print ("tmp: " + tmp)
-        vetorQnt[tmp] = vetorQnt[tmp] + 1
         custoamostras.append(custoprocesso)
     media = np.mean(custoamostras)
     desviopadrao = np.std(custoamostras, axis=None, dtype=float)
-    intervaloconfianca =st.t.interval(0.95, len(custoamostras)-1, loc=np.mean(custoamostras), scale=st.sem(custoamostras))
+    alfa = 0.99
+    intervaloconfianca =st.t.interval(float(alfa), len(custoamostras)-1, loc=np.mean(custoamostras), scale=st.sem(custoamostras))
     print("Número de Amostras: ", N)
     print("Média: ", media)
     print("Desvio padrao: ", desviopadrao)
-    print("Desvio padrão populacional: ", statistics.pstdev(custoamostras,mu=None))
+   # print("Desvio padrão populacional: ", statistics.pstdev(custoamostras,mu=None))
+    print("Nível de confiança: ", + alfa)
     print("Intervalo de confiança:", intervaloconfianca)
     #     # FIM do loop de simulação
 #
@@ -185,10 +188,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('seaborn-white')
 data = custoamostras
-plt.hist(data, bins=50, alpha=0.5, histtype='stepfilled', color='blue', edgecolor='none')
-plt.ylabel('Valores')
+n, bins, patches = plt.hist(data, bins='auto', alpha=0.1, histtype='stepfilled', color='blue', edgecolor='none',rwidth=0.85)
+plt.ylabel('Frequencia')
 plt.xlabel('Custos')
-plt.show()
+#plt.show()
 
 
 #
