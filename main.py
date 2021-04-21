@@ -124,7 +124,7 @@ import scipy.stats as st
 
 import copy
 #
-N = 400 #Define número de simulações
+N = 300 #Define número de simulações
 #
 # # cria Dictionary para receber as frequencias
 vetorcaminho = list()
@@ -161,12 +161,12 @@ with open('simulacao.csv', 'w',newline='') as file:
             custoprocesso = custo + custoprocesso
             vetorQnt[tmp] = vetorQnt[tmp] + 1
 
-       # print("Melhor caminho: " +str(melhorCaminho)) # + " Custo: " + str(custoprocesso))
+        print("Melhor caminho: " +str(melhorCaminho)) # + " Custo: " + str(custoprocesso))
          #   print ("tmp: " + tmp)
         custoamostras.append(custoprocesso)
     media = np.mean(custoamostras)
     desviopadrao = np.std(custoamostras, axis=None, dtype=float)
-    alfa = 0.99
+    alfa = 0.95
     intervaloconfianca =st.t.interval(float(alfa), len(custoamostras)-1, loc=np.mean(custoamostras), scale=st.sem(custoamostras))
     print("Número de Amostras: ", N)
     print("Média: ", media)
@@ -178,11 +178,11 @@ with open('simulacao.csv', 'w',newline='') as file:
 #
 print ("Dados " + str(vetorQnt))
 #calcula percentual
-for vetor in vetorQnt:
-     vetorPerc[vetor] = int(vetorQnt[vetor]) / N
+#for vetor in vetorQnt:
+#     vetorPerc[vetor] = int(vetorQnt[vetor]) / N
 #
 print("Quantidade de trechos utilizados: ",  vetorQnt)
-print("Percentual de trechos utilizados: ", vetorPerc)
+#print("Percentual de trechos utilizados: ", vetorPerc)
 
 import numpy as np
 import matplotlib.pyplot as plt
